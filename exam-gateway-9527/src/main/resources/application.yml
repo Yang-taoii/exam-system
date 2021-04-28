@@ -1,0 +1,27 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: exam-gateway-9527
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名称进行路由
+      routes:
+        - id: user_routh  #路由的id，没有固定规则，但要求唯一，建议配合服务名称
+          uri: http://localhost:8001 #路由匹配后提供服务的地址  #uri: lb://cloud-payment-service  #匹配后提供服务的地址，实现网关负载均衡
+          predicates:
+            - Path=/provider/user/** #断言，如果路径相匹配，则进行路由
+        - id: user_routh2
+          uri: http://localhost:9001
+          predicates:
+            - Path=/consumer/user/** #断言，如果路径相匹配，则进行路由
+eureka:
+  instance:
+    hostname: exam-gateway-9527
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://eureka7001.com:7001/eureka
