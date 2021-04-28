@@ -38,7 +38,7 @@ public class AutoGeneratorTest {
         //配置策略
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
-        strategyConfig.setInclude("t_user","t_user_event_log");
+        strategyConfig.setInclude("t_question","t_subject");
         strategyConfig.setEntityLombokModel(true);
         autoGenerator.setStrategy(strategyConfig);
 
