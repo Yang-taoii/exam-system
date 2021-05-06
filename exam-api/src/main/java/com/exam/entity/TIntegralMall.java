@@ -15,7 +15,7 @@ public class TIntegralMall {
   private String userUuid;
   private String prodName;
   private Integer prodCount;
-  private Double prodPrice;
+  private Integer prodPrice;
   private Integer prodState;
   private Date createTime;
   private Integer prodClass;
