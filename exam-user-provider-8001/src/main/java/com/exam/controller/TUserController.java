@@ -32,25 +32,6 @@ public class TUserController {
         return userService.listMaps(new QueryWrapper<>());
     }
 
-    @RequestMapping("/provider/user/login")
-    public TUser login(String userName,String password){
-        QueryWrapper<TUser> wrapper = new QueryWrapper<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("user_name",userName);
-        map.put("password",password);
-        wrapper.allEq(map);
-        return userService.getOne(wrapper);
-    }
-
-
-    @RequestMapping("/provider/user/testSession")
-    public String testSession(HttpSession session){
-        String id = session.getId();
-        Object uname = session.getAttribute("user");
-        System.out.println("提供者9091===>>>sessionId:"+id+":::uname:"+uname);
-        return "sesssionId:"+id;
-    }
-
 
 }
 

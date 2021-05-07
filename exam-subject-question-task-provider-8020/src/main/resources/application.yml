@@ -35,7 +35,3 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.exam.entity
   type-enums-package: com.exam.enums #枚举包扫描
-#  global-config:
-#    db-config:
-#      logic-not-delete-value: 0
-#      logic-delete-value: 1

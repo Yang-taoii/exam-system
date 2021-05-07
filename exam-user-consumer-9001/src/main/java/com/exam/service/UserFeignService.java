@@ -18,7 +18,7 @@ import java.util.Map;
 @FeignClient(value = "EXAM-USER-PROVIDER-8001")
 public interface UserFeignService {
 
-    @RequestMapping("/provider/getAll")
+    @RequestMapping("/provider/user/getAll")
     List<Map<String, Object>> getAll();
 
     @RequestMapping("/provider/user/login")

@@ -23,6 +23,16 @@ spring:
       min-idle: 10        # 最小空闲连接数
       max-wait:  -1s        # 等待可用连接的最大时间，负数为不限制
       max-active: -1        # 最大活跃连接数，负数为不限制
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+  mvc:
+      static-path-pattern: /**
+  resources:
+      static-locations: classpath:/templates/,classpath:/META-NF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
 
 # Actuator Web 访问端口
 management:
@@ -38,8 +48,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-#服务降级的开关
-feign:
-  hystrix:
-    enabled: true

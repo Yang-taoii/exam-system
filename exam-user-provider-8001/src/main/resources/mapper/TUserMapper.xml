@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.mapper.TUserMapper">
 
+    <select id="selectAllByPage" resultType="java.util.Map">
+        select * from  t_user
+            <where>
+                <if test="user_name != '' and user_name != null">and user_name = #{user_name}</if>
+                <if test="user_level != '' and user_level != null">and user_level = #{user_level}</if>
+                and deleted = 1
+            </where>
+    </select>
+
+
+    <select id="getUserByName" resultType="java.util.Map">
+        select * from t_user where user_name = #{user_name}
+    </select>
 </mapper>
