@@ -22,7 +22,7 @@
             </div>
             <ul class="layui-nav left fast-add" lay-filter="">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">+新增</a>
+                    <a href="javascript:;">新增</a>
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
@@ -34,27 +34,21 @@
                         <dd>
                             <a onclick="xadmin.open('富文本编辑器','富文本编辑器.html',500,300)">
                                 <i class="iconfont">&#xe6a8;</i>弹出指定宽高</a></dd>
-                        <dd>
-                            <a onclick="xadmin.add_tab('在tab打开','member-list.html')">
-                                <i class="iconfont">&#xe6b8;</i>在tab打开</a></dd>
-                        <dd>
-                            <a onclick="xadmin.add_tab('在tab打开刷新','member-del.html',true)">
-                                <i class="iconfont">&#xe6b8;</i>在tab打开刷新</a></dd>
                     </dl>
                 </li>
             </ul>
 			
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">admin</a>
+                    <a href="javascript:;" th:text="${session.get('loginUser').get('user_name')}"></a>
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
-                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                            <a onclick="xadmin.open('个人信息','http://localhost:9001/consumer/user/toUserInfo')">个人信息</a></dd>
                         <dd>
-                            <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                            <a th:href="@{/consumer/user/toLogin}">切换帐号</a></dd>
                         <dd>
-                            <a href="./login.html">退出</a></dd>
+                            <a th:href="@{/out}">退出</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item to-index">
@@ -82,14 +76,17 @@
                             <i class="iconfont nav_right">&#xe697;</i>
 						</a>
                         <ul class="sub-menu">
-                           
-							
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('用户列表','http://localhost:9001/user-list.html')">-->
+<!--                                    <i class="iconfont">&#xe6b5;</i>-->
+<!--                                    <cite>用户列表</cite></a>-->
+<!--                            </li>-->
                             <li>
-                                <a onclick="xadmin.add_tab('用户列表','http://localhost:9001/user-list.html')">
+                                <a onclick="xadmin.add_tab('用户列表','http://localhost:9001/consumer/user/user-page1?current=1&size&userName&userLevel')">
                                     <i class="iconfont">&#xe6b5;</i>
                                     <cite>用户列表</cite></a>
                             </li>
-							
+
 							<li>
                                 <a href="javascript:;">
                                     <i class="iconfont">&#xe6b2;</i>
@@ -104,30 +101,30 @@
                                 </ul>
                             </li>
 							
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="iconfont">&#xe70b;</i>
-                                    <cite>用户管理</cite>
-                                    <i class="iconfont nav_right">&#xe697;</i></a>
-                                <ul class="sub-menu">
-									<li>
-										<a onclick="xadmin.add_tab('用户新增','http://localhost:9001/user-add.html')">
-										<i class="iconfont">&#xe6a7;</i>
-										<cite>用户新增</cite></a>
-									</li>
-                                    <li>
-										<a onclick="xadmin.add_tab('用户修改','http://localhost:9001/user-edit.html')">
-                                        <i class="iconfont">&#xe6a7;</i>
-                                        <cite>用户修改</cite></a>
-                                    </li>
-									<li>
-										<a onclick="xadmin.add_tab('用户删除','http://localhost:9001/user-del.html')">
-										<i class="iconfont">&#xe6a7;</i>
-										<cite>用户删除</cite></a>
-									</li>
-								
-                                </ul>
-                            </li>
+<!--                            <li>-->
+<!--                                <a href="javascript:;">-->
+<!--                                    <i class="iconfont">&#xe70b;</i>-->
+<!--                                    <cite>用户管理</cite>-->
+<!--                                    <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                                <ul class="sub-menu">-->
+<!--									<li>-->
+<!--										<a onclick="xadmin.add_tab('用户新增','http://localhost:9001/user-add.html')">-->
+<!--										<i class="iconfont">&#xe6a7;</i>-->
+<!--										<cite>用户新增</cite></a>-->
+<!--									</li>-->
+<!--                                    <li>-->
+<!--										<a onclick="xadmin.add_tab('用户修改','http://localhost:9001/user-edit.html')">-->
+<!--                                        <i class="iconfont">&#xe6a7;</i>-->
+<!--                                        <cite>用户修改</cite></a>-->
+<!--                                    </li>-->
+<!--									<li>-->
+<!--										<a onclick="xadmin.add_tab('用户删除','http://localhost:9001/user-del.html')">-->
+<!--										<i class="iconfont">&#xe6a7;</i>-->
+<!--										<cite>用户删除</cite></a>-->
+<!--									</li>-->
+<!--								-->
+<!--                                </ul>-->
+<!--                            </li>-->
                         </ul>
                     </li>
                     <li>
@@ -206,10 +203,7 @@
                             </li>
                         </ul>
                     </li>
-					
-					
-					
-					
+
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="任务管理">&#xe723;</i>
@@ -256,18 +250,21 @@
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="用户日志">&#xe6ce;</i>
+                            <i class="iconfont left-nav-li" lay-tips="用户日志">&#xe69e;</i>
                             <cite>用户日志</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-						</a>
-						
-						
-						
-						
+                            <i class="iconfont nav_right">&#xe699;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('日志详情','http://localhost:9001/consumer/user/toUserLog')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>日志详情</cite></a>
+                            </li>
+                        </ul>
                     </li>
-					
+
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>

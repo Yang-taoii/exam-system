@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * <p>
@@ -31,7 +33,29 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
-    public List<Map<String, Object>> selectAllByPage(Page<Map<String, Object>> page, String userName, String userLevel) {
+    public Page<Map<String, Object>> selectAllByPage(Page<Map<String, Object>> page, String userName, String userLevel) {
         return userMapper.selectAllByPage(page,userName,userLevel);
+    }
+
+    @Override
+    public Boolean deleteUserById(String id) {
+        return userMapper.deleteUserById(id);
+    }
+
+    @Override
+    public Boolean updateStatus(String id, Integer status) {
+        return userMapper.updateStatus(id,status);
+    }
+
+    @Override
+    public Boolean editUserInfoById(String id, String user_name, String real_name, Integer age, Integer sex, String phone, Integer role) {
+        Date modify_time = new Date();
+        return userMapper.editUserInfoById(id, user_name, real_name, age, sex, phone, role, modify_time);
+    }
+
+    @Override
+    public Boolean saveUser(String user_name, String real_name, Integer age, Integer sex, String phone, Integer role,String password, Integer user_level, Date birth_day) {
+        String user_uuid = UUID.randomUUID().toString().replace("-","");
+        return userMapper.saveUser(user_name, real_name, age, sex, phone, role, user_uuid, password, user_level, birth_day);
     }
 }

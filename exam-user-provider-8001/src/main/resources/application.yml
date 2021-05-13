@@ -33,6 +33,7 @@ eureka:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
   type-aliases-package: com.exam.entity
   type-enums-package: com.exam.enums #枚举包扫描
 #  global-config:

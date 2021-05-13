@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,8 +19,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class TUser implements Serializable {
 
+  private static final long serialVersionUID = 1L;
+
   @TableId(type = IdType.AUTO)
-  private Long id;
+  private String id;
   private String userUuid;
   private String userName;
   private String password;

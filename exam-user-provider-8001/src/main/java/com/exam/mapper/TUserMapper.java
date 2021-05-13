@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,37 @@ public interface TUserMapper extends BaseMapper<TUser> {
     Map<String, Object> getUserByName(@Param("user_name")String userName);
 
 
-    List<Map<String,Object>> selectAllByPage(Page<Map<String, Object>> page,
+    Page<Map<String,Object>> selectAllByPage(Page<Map<String, Object>> page,
                                              @Param("user_name") String userName,
                                              @Param("user_level") String userLevel);
+
+    Boolean deleteUserById(@Param("id")String id);
+
+    /**
+     * 通过id修改用户状态
+     * @param id id
+     * @param status 用户状态
+     * @return Boolean
+     */
+    Boolean updateStatus(@Param("id")String id,@Param("status") Integer status);
+
+    Boolean editUserInfoById(@Param("id")String id,
+                             @Param("user_name")String user_name,
+                             @Param("real_name")String real_name,
+                             @Param("age")Integer age,
+                             @Param("sex")Integer sex,
+                             @Param("phone")String phone,
+                             @Param("role")Integer role,
+                             @Param("modify_time")Date modify_time);
+
+    Boolean saveUser(@Param("user_name")String user_name,
+                     @Param("real_name")String real_name,
+                     @Param("age")Integer age,
+                     @Param("sex")Integer sex,
+                     @Param("phone")String phone,
+                     @Param("role")Integer role,
+                     @Param("user_uuid")String user_uuid,
+                     @Param("password")String password,
+                     @Param("user_level") Integer user_level,
+                     @Param("birth_day") Date birth_day);
 }

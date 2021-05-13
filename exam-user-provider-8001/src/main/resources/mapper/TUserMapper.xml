@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.mapper.TUserMapper">
+    <insert id="saveUser">
+        insert into t_user(user_uuid,user_name,password,real_name,age,sex,birth_day,user_level,phone,role)
+        values(#{user_uuid},#{user_name},#{password},#{real_name},#{age},#{sex},#{birth_day},#{user_level},#{phone},#{role})
+    </insert>
+
+    <update id="updateStatus">
+        update t_user set status = #{status} where id = #{id}
+    </update>
+
+    <update id="editUserInfoById">
+        update t_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user_name!=null and user_name!='' ">user_name=#{real_name},</if>
+            <if test="real_name!=null and real_name!='' ">real_name=#{real_name},</if>
+            <if test="age!=null">age=#{age},</if>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="phone!=null and phone!=''">phone=#{phone},</if>
+            <if test="role!=null">role=#{role},</if>
+            <if test="modify_time!=null">modify_time=#{modify_time},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUserById">
+        update t_user set deleted = 0 where id = #{id}
+    </delete>
 
     <select id="selectAllByPage" resultType="java.util.Map">
         select * from  t_user
@@ -13,6 +39,6 @@
 
 
     <select id="getUserByName" resultType="java.util.Map">
-        select * from t_user where user_name = #{user_name}
+        select * from t_user where user_name = #{user_name} and deleted = 1 and status = 1
     </select>
 </mapper>

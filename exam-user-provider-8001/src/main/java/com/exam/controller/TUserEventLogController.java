@@ -1,9 +1,13 @@
 package com.exam.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.exam.entity.TUserEventLog;
+import com.exam.service.TUserEventLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -14,8 +18,17 @@ import org.springframework.stereotype.Controller;
  * @since 2021-04-26
  */
 @Controller
-@RequestMapping("//tUserEventLog")
 public class TUserEventLogController {
+
+    @Autowired
+    private TUserEventLogService logService;
+
+    @ResponseBody
+    @RequestMapping("/consumer/userLog/add")
+    public boolean add(TUserEventLog log){
+        return logService.save(log);
+    }
+
 
 }
 

@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class TUserEventLog {
 
-  private Integer id;
+  private Long id;
   private Integer userId;
   private String userName;
   private String realName;

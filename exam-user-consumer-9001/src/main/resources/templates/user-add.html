@@ -1,187 +1,218 @@
 <!DOCTYPE html>
-<html class="x-admin-sm">
-    
-    <head>
-        <meta charset="UTF-8">
-        <title>用户新增页面</title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="./css/font.css">
-        <link rel="stylesheet" href="./css/xadmin.css">
-        <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/xadmin.js"></script>
-    </head>
-    <body>
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <form class="layui-form">
-				
-				
-                  <div class="layui-form-item">
-                      <label for="username" class="layui-form-label">
-                          <span class="x-red">*</span>登录名
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="text" id="username" name="username" required="" lay-verify="required"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">
-                          <span class="x-red">*</span>将会成为您唯一的登入名
-                      </div>
-                  </div>
-				  
-				  <div class="layui-form-item">
-                      <label for="username" class="layui-form-label">
-                          <span class="x-red">*</span>真实姓名
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="text" id="username" name="username" required="" lay-verify="required"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">
-                          <span class="x-red">*</span>请输入您的真实姓名
-                      </div>
-                  </div>
-				  
-				  <div class="layui-form-item">
-                      <label for="L_pass" class="layui-form-label">
-                          <span class="x-red">*</span>密码
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">
-                          6到16个字符
-                      </div>
-                  </div>
-				  
-				  
-                  <div class="layui-form-item">
-                      <label for="L_repass" class="layui-form-label">
-                          <span class="x-red">*</span>确认密码
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                  </div>
-				  
-				  <div class="layui-form-item">
-                      <label for="L_repass" class="layui-form-label">
-                          <span class="x-red">*</span>用户年龄
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                  </div>
-				  
-				  		<!-- 单选按钮 -->
-					<div class="layui-form-item" pane>
-						<label class="layui-form-label">Sex</label>
-						<div class="layui-input-block">
-							<input type="radio" name="sex" value="1" title="男" checked>
-							<input type="radio" name="sex" value="0" title="女">
-						</div>
-					</div>
-					
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
 
-				  
-                  <div class="layui-form-item">
-                      <label class="layui-form-label"><span class="x-red">*</span>角色</label>
-                      <div class="layui-input-block">
-                        <input type="radio" name="role" lay-skin="primary" title="超级管理员">
-                        <input type="radio" name="role" lay-skin="primary" title="学生">
-                        <input type="radio" name="role" lay-skin="primary" title="老师">
-                      </div>
-                  </div>
-				  
-                  <div class="layui-form-item">
-                      <label for="phone" class="layui-form-label">
-                          <span class="x-red">*</span>手机
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">
-                          <span class="x-red">*</span>必填项
-                      </div>
-                  </div>
-				  
-				  
-                  <div class="layui-form-item">
-                      <label for="L_email" class="layui-form-label">
-                          <span class="x-red">*</span>邮箱
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">
-                          <span class="x-red">*</span>选填项
-                      </div>
-                  </div>
-				  
-				  
-		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
-			</div>
-		</div>
-				    
-              </form>
+<head>
+    <meta charset="UTF-8">
+    <title>用户新增页面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/xadmin.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.1.js}"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+
+
+            <div class="layui-form-item">
+                <label for="user_name" class="layui-form-label">
+                    <span class="x-red">*</span>登录名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="user_name" name="user_name" required="" lay-verify="nick_name"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>将会成为您唯一的登入名
+                </div>
             </div>
-        </div>
-        <script>layui.use(['form', 'layer'],
-            function() {
-                $ = layui.jquery;
-                var form = layui.form,
-                layer = layui.layer;
 
-                //自定义验证规则
-                form.verify({
-                    nikename: function(value) {
-                        if (value.length < 5) {
-                            return '昵称至少得5个字符啊';
-                        }
-                    },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                    repass: function(value) {
-                        if ($('#L_pass').val() != $('#L_repass').val()) {
-                            return '两次密码不一致';
+            <div class="layui-form-item">
+                <label for="real_name" class="layui-form-label">
+                    <span class="x-red">*</span>真实姓名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="real_name" name="real_name" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>请输入您的真实姓名
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_pass" class="layui-form-label">
+                    <span class="x-red">*</span>密码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    6到16个字符
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>确认密码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>生日
+                </label>
+                <div class="layui-input-inline layui-show-xs-block">
+                    <input class="layui-input" placeholder="选择日期" name="birth_day" id="birth">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>用户年龄
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password" name="age" required="" lay-verify=""
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>就读年级
+                </label>
+                <div class="layui-input-inline">
+                    <select name="user_level" class="layui-select">
+                        <option value="1" selected>一年级</option>
+                        <option value="1">二年级</option>
+                        <option value="1">三年级</option>
+                        <option value="1">四年级</option>
+                        <option value="1">五年级</option>
+                        <option value="1">六年级</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 单选按钮 -->
+            <div class="layui-form-item" pane>
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>性别
+                </label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="1" title="男" checked>
+                    <input type="radio" name="sex" value="2" title="女">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>角色</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="role" lay-skin="primary" title="超级管理员" value="3">
+                    <input type="radio" name="role" lay-skin="primary" title="学生" value="1">
+                    <input type="radio" name="role" lay-skin="primary" title="老师" value="2">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="phone" class="layui-form-label">
+                    <span class="x-red">*</span>手机
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="phone" name="phone" lay-verify="phone"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>必填项
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<script>
+    layui.use(['laydate', 'form'], function () {
+        var laydate = layui.laydate;
+        laydate.render({elem: '#birth'});
+    });
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form,
+            layer = layui.layer;
+        //自定义验证规则
+        form.verify({
+            nick_name: function (value) {
+                if (value.length < 5) {
+                    return '昵称至少得5个字符啊';
+                }
+            },
+            pass: [/(.+){6,12}$/, '密码必须6到12位'],
+            repass: function (value) {
+                if ($('#L_pass').val() != $('#L_repass').val()) {
+                    return '两次密码不一致';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(formDemo)',
+            function (data) {
+                console.log(data);
+                alert("user_name：" + data.field.user_name);
+                alert("real_name：" + data.field.real_name);
+                alert("age：" + data.field.age);
+                alert("sex：" + data.field.sex);
+                alert("role：" + data.field.role);
+                alert("phone：" + data.field.phone);
+                alert("user_level：" + data.field.user_level);
+                alert("birth_day：" + data.field.birth_day);
+                alert("password：" + data.field.password);
+                $.post("/consumer/user/save", {
+                        "user_name": data.field.user_name,
+                        "real_name": data.field.real_name,
+                        "user_level": data.field.user_level,
+                        "age": data.field.age,
+                        "sex": data.field.sex,
+                        "role": data.field.role,
+                        "phone": data.field.phone,
+                        "birth_day": data.field.birth_day,
+                        "password": data.field.password,
+                    }, function (data) {
+                        if (data) {
+                            layer.alert("增加成功", {icon: 6}, function () {
+                                //关闭当前frame
+                                xadmin.close();
+                                // 可以对父窗口进行刷新
+                                xadmin.father_reload();
+                            });
                         }
                     }
-                });
-
-                //监听提交
-                form.on('submit(add)',
-                function(data) {
-                    console.log(data);
-                    //发异步，把数据提交给php
-                    layer.alert("增加成功", {
-                        icon: 6
-                    },
-                    function() {
-                        //关闭当前frame
-                        xadmin.close();
-
-                        // 可以对父窗口进行刷新 
-                        xadmin.father_reload();
-                    });
-                    return false;
-                });
-
-            });</script>
-        <script>var _hmt = _hmt || []; (function() {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();</script>
-    </body>
+                );
+                return false;
+            });
+    });
+</script>
+</body>
 
 </html>

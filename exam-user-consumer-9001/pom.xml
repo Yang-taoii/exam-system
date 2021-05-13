@@ -17,6 +17,11 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.exam</groupId>
             <artifactId>exam-api</artifactId>

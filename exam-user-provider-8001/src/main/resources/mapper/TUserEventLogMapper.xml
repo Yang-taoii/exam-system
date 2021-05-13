@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.mapper.TUserEventLogMapper">
 
+    <select id="getUserLogByNameOrUUid" resultType="java.util.Map">
+        select * from t_user_event_log
+        <where>
+            <if test="user_name != '' and user_name != null">and user_name = #{user_name}</if>
+            <if test="user_id != '' and user_id != null">and user_id = #{user_id}</if>
+        </where>
+    </select>
 </mapper>
