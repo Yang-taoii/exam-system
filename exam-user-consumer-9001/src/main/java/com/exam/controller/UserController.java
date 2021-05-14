@@ -11,9 +11,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -21,6 +19,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,8 +112,12 @@ public class UserController {
         if (current == null){
             current  = 1;
         }
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("user_name",user_name);
+        condition.put("user_level",user_level);
         Page<Map<String, Object>> page = service.fenye(current, size, user_name, user_level);
         model.addAttribute("users",page);
+        model.addAttribute("condition",condition);
         return "user-list";
     }
 /******************************************************************************************/
@@ -199,6 +202,16 @@ public class UserController {
     public Boolean delUser(String id){
         return service.del(id);
     }
+
+    @RequestMapping("/consumer/user/delAll")
+    @ResponseBody
+    public Boolean delUser(String[] id){
+        for (int i = 0; i <id.length ; i++) {
+            System.out.println(id[i]);
+        }
+        return service.delAll(id);
+    }
+
 
     /**
      * 通过id修改用户状态

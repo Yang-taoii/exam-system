@@ -42,6 +42,13 @@ public interface TUserService extends IService<TUser> {
     Boolean deleteUserById(@Param("id")String id);
 
     /**
+     * 批量删除
+     * @param id id[]
+     * @return Boolean
+     */
+    Boolean batchDeletionById(String[] id);
+
+    /**
      * 通过id修改用户状态
      * @param id id
      * @param status 用户状态
@@ -66,4 +73,15 @@ public interface TUserService extends IService<TUser> {
                      @Param("password")String password,
                      @Param("user_level") Integer user_level,
                      @Param("birth_day") Date birth_day);
+
+
+
+    /**
+     * 前端方法 忘记密码
+     * @param user_name 用户名
+     * @param password 密码
+     * @return Boolean
+     */
+    Boolean updatePasswordByName(@Param("user_name")String user_name,
+                                 @Param("password")String password);
 }

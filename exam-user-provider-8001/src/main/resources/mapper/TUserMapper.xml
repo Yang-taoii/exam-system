@@ -24,6 +24,16 @@
         WHERE id=#{id}
     </update>
 
+    <update id="batchDeletionById">
+        update t_user set deleted = 0 where id in 
+        <foreach collection="array" item="user_id" index="index" open="(" close=")" separator=",">
+        #{user_id}
+        </foreach>
+    </update>
+    <update id="updatePasswordByName">
+        update t_user set password = #{password} where user_name = #{user_name}
+    </update>
+
     <delete id="deleteUserById">
         update t_user set deleted = 0 where id = #{id}
     </delete>

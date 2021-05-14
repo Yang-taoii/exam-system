@@ -43,6 +43,11 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
+    public Boolean batchDeletionById(String[] id) {
+        return userMapper.batchDeletionById(id);
+    }
+
+    @Override
     public Boolean updateStatus(String id, Integer status) {
         return userMapper.updateStatus(id,status);
     }
@@ -57,5 +62,10 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     public Boolean saveUser(String user_name, String real_name, Integer age, Integer sex, String phone, Integer role,String password, Integer user_level, Date birth_day) {
         String user_uuid = UUID.randomUUID().toString().replace("-","");
         return userMapper.saveUser(user_name, real_name, age, sex, phone, role, user_uuid, password, user_level, birth_day);
+    }
+
+    @Override
+    public Boolean updatePasswordByName(String user_name, String password) {
+        return userMapper.updatePasswordByName(user_name, password);
     }
 }

@@ -38,6 +38,13 @@ public interface TUserMapper extends BaseMapper<TUser> {
     Boolean deleteUserById(@Param("id")String id);
 
     /**
+     * 批量删除
+     * @param id id[]
+     * @return Boolean
+     */
+    Boolean batchDeletionById(String[] id);
+
+    /**
      * 通过id修改用户状态
      * @param id id
      * @param status 用户状态
@@ -64,4 +71,7 @@ public interface TUserMapper extends BaseMapper<TUser> {
                      @Param("password")String password,
                      @Param("user_level") Integer user_level,
                      @Param("birth_day") Date birth_day);
+
+    Boolean updatePasswordByName(@Param("user_name")String user_name,
+                                 @Param("password")String password);
 }

@@ -51,6 +51,9 @@ public interface UserFeignService {
     @RequestMapping("/provider/user/del")
     Boolean del(@RequestParam("id")String id);
 
+    @RequestMapping("/provider/user/delAll")
+    Boolean delAll(@RequestParam("id") String[] id);
+
     /**
      *  8001 用户提供者方法 根据id修改用户状态
      * @param id id

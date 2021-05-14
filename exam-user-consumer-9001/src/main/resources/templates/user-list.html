@@ -69,7 +69,7 @@
                                 </thead>
                                 <tbody>
                                   <tr th:each="user:${users.records}" class="tr">
-                                    <td><input type="checkbox" name="id" lay-skin="primary"></td>
+                                    <td><input type="checkbox" name="id" lay-skin="primary" th:value="${user.id}"></td>
                                     <td>[[${user.id}]]</td>
                                     <td>[[${user.user_name}]]</td>
                                     <td>[[${user.real_name}]]</td>
@@ -119,8 +119,8 @@
                         <div class="layui-card-body ">
                             <div class="page">
                                 <div>
-                                  <a class="prev" href="javascript:;" id="prev">&lt;&lt;</a>&emsp;&emsp;&emsp;&emsp;
-                                  <a class="next" href="javascript:;" id="next">&gt;&gt;</a>
+                                  <a class="prev" th:href="@{/consumer/user/user-page1(current=${users.current}-1,user_name=${condition.get('user_name')},user_level=${condition.get('user_levle')})}">&lt;&lt;</a>&emsp;&emsp;&emsp;&emsp;
+                                  <a class="next" th:href="@{/consumer/user/user-page1(current=${users.current}+1,user_name=${condition.get('user_name')},user_level=${condition.get('user_levle')})}">&gt;&gt;</a>
                                 </div>
                             </div>
                         </div>
@@ -211,18 +211,22 @@
 
       function delAll (argument) {
         var ids = [];
-
         // 获取选中的id 
         $('tbody input').each(function(index, el) {
             if($(this).prop('checked')){
                ids.push($(this).val())
             }
         });
-  
+
         layer.confirm('确认要删除吗？'+ids.toString(),function(index){
             //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+            alert(ids)
+            $.post("/consumer/user/delAll",{'id':ids.toString()},function (data) {
+                if (data){
+                    layer.msg('删除成功', {icon: 1});
+                    $(".layui-form-checked").not('.header').parents('tr').remove();
+                }
+            },'json');
         });
       }
     </script>

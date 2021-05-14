@@ -91,6 +91,16 @@ public class TUserController {
     }
 
     /**
+     * 批量删除
+     * @param id String[] id
+     * @return Boolean
+     */
+    @RequestMapping("/provider/user/delAll")
+    public Boolean del(String[] id){
+        return userService.batchDeletionById(id);
+    }
+
+    /**
      * 通过id修改用户状态
      * @param id id
      * @param status 状态
@@ -115,11 +125,30 @@ public class TUserController {
     public Boolean updateUserInfo(String id,String user_name,String real_name,Integer age,Integer sex,String phone,Integer role){
         return userService.editUserInfoById(id, user_name, real_name, age, sex, phone, role);
     }
-
+    //后端用户新增方法
     @PostMapping("/provider/user/save")
     public Boolean saveUser(String user_name,String password,String real_name,Integer age,Integer sex,Date birth_day,Integer user_level,String phone,Integer role){
         return userService.saveUser(user_name, real_name, age, sex, phone, role, password, user_level, birth_day);
     }
 
+    //前端用户新增方法
+    @PostMapping(value = "/provider/user/front/save")
+    public Boolean saveUser2(String user_name,String password){
+        TUser user = new TUser();
+        user.setUserName(user_name);
+        user.setPassword(password);
+        user.setRole(1);
+        user.setUserUuid(UUID.randomUUID().toString());
+        user.setUserLevel(1);
+        user.setPhone("100");
+        user.setAge(0);
+        return userService.save(user);
+    }
+
+    //前端 忘记密码
+    @PostMapping(value = "/provider/user/front/updatePassword")
+    public Boolean updatePassword2(String user_name,String password){
+        return userService.updatePasswordByName(user_name, password);
+    }
 }
 
